@@ -62,3 +62,47 @@
 }
 
 
+/* alter css of the html display page */
+/* works with default theme */
+
+.pkp_structure_main:first-child:last-child {
+    margin-left: 0;
+}
+.pkp_structure_main:first-child:last-child::before {
+    left: 0px;
+}
+.pkp_structure_main:first-child:last-child::after {
+    right: 0px;
+}
+
+@media(min-width: 992px) {
+	.pkp_structure_main:first-child:last-child {
+		margin-top: 10px;
+		float: left;
+		width: 952px;
+	}
+	.obj_article_details .main_entry {
+		float: left;
+		width: 72%;
+	}
+	.obj_article_details .entry_details {
+		float: left;
+		width: 28%;
+	}
+}
+@media( min-width: 1200px ) {
+	.pkp_structure_main:first-child:last-child {
+		margin-top: 10px;
+		float: left;
+		width: 1160px;
+	}
+	.obj_article_details .main_entry {
+		float: left;
+		width: 72%;
+	}
+	.obj_article_details .entry_details {
+		float: left;
+		width: 28%;
+	}
+}
+

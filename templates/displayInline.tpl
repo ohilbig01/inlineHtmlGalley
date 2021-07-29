@@ -76,7 +76,7 @@
 
 
 {* sub-hh / set to 1 -> no sidebar *}
-{assign var=isFullWidth value=0}
+{assign var=isFullWidth value=1}
 <!-- +++ inline HTML template +++ -->
 
 <article class="obj_article_details">
@@ -111,81 +111,80 @@
 	<div class="row">
 		<div class="main_entry">
 
+		{* Provide download link *}
+		{* <div class="inline_html_galley_download">
+			<a class="obj_galley_link file" href="{url page="article" op="download" path=$article->getBestArticleId()|to_array:$galley->getBestGalleyId()}">
+				{translate key="common.download"}
+			</a>
+		</div> *}
 
-	{* Provide download link *}
-	{* <div class="inline_html_galley_download">
-		<a class="obj_galley_link file" href="{url page="article" op="download" path=$article->getBestArticleId()|to_array:$galley->getBestGalleyId()}">
-			{translate key="common.download"}
-		</a>
-	</div> *}
+		{* Show article inline *}
+		<div class="inline_html">
+			{$inlineHtmlGalley}
+		</div>
 
-	{* Show article inline *}
-	<div class="inline_html">
-		{$inlineHtmlGalley}
-	</div>
+		{* already included in HTML galley: *}
+		{* Authors, orcid, ror *}
+		{* DOI (requires plugin) *}
+		{* Keywords *}
+		{* Abstract *}
 
-			{* already included in HTML galley: *}
-			{* Authors, orcid, ror *}
-			{* DOI (requires plugin) *}
-			{* Keywords *}
-			{* Abstract *}
+		{call_hook name="Templates::Article::Main"}
 
-			{call_hook name="Templates::Article::Main"}
-
-			{* Author biographies *}
-			{assign var="hasBiographies" value=0}
-			{foreach from=$publication->getData('authors') item=author}
-				{if $author->getLocalizedData('biography')}
-					{assign var="hasBiographies" value=$hasBiographies+1}
-				{/if}
-			{/foreach}
-			{if $hasBiographies}
-				<section class="item author_bios">
-					<h2 class="label">
-						{if $hasBiographies > 1}
-							{translate key="submission.authorBiographies"}
-						{else}
-							{translate key="submission.authorBiography"}
-						{/if}
-					</h2>
-					{foreach from=$publication->getData('authors') item=author}
-						{if $author->getLocalizedData('biography')}
-							<section class="sub_item">
-								<h3 class="label">
-									{if $author->getLocalizedData('affiliation')}
-										{capture assign="authorName"}{$author->getFullName()|escape}{/capture}
-										{capture assign="authorAffiliation"}<span class="affiliation">{$author->getLocalizedData('affiliation')|escape}</span>{/capture}
-										{translate key="submission.authorWithAffiliation" name=$authorName affiliation=$authorAffiliation}
-									{else}
-										{$author->getFullName()|escape}
-									{/if}
-								</h3>
-								<div class="value">
-									{$author->getLocalizedData('biography')|strip_unsafe_html}
-								</div>
-							</section>
-						{/if}
-					{/foreach}
-				</section>
+		{* Author biographies *}
+		{assign var="hasBiographies" value=0}
+		{foreach from=$publication->getData('authors') item=author}
+			{if $author->getLocalizedData('biography')}
+				{assign var="hasBiographies" value=$hasBiographies+1}
 			{/if}
+		{/foreach}
+		{if $hasBiographies}
+			<section class="item author_bios">
+				<h2 class="label">
+					{if $hasBiographies > 1}
+						{translate key="submission.authorBiographies"}
+					{else}
+						{translate key="submission.authorBiography"}
+					{/if}
+				</h2>
+				{foreach from=$publication->getData('authors') item=author}
+					{if $author->getLocalizedData('biography')}
+						<section class="sub_item">
+							<h3 class="label">
+								{if $author->getLocalizedData('affiliation')}
+									{capture assign="authorName"}{$author->getFullName()|escape}{/capture}
+									{capture assign="authorAffiliation"}<span class="affiliation">{$author->getLocalizedData('affiliation')|escape}</span>{/capture}
+									{translate key="submission.authorWithAffiliation" name=$authorName affiliation=$authorAffiliation}
+								{else}
+									{$author->getFullName()|escape}
+								{/if}
+							</h3>
+							<div class="value">
+								{$author->getLocalizedData('biography')|strip_unsafe_html}
+							</div>
+						</section>
+					{/if}
+				{/foreach}
+			</section>
+		{/if}
 
-			{* References *}
-			{if $parsedCitations || $publication->getData('citationsRaw')}
-				<section class="item references">
-					<h2 class="label">
-						{translate key="submission.citations"}
-					</h2>
-					<div class="value">
-						{if $parsedCitations}
-							{foreach from=$parsedCitations item="parsedCitation"}
-								<p>{$parsedCitation->getCitationWithLinks()|strip_unsafe_html} {call_hook name="Templates::Article::Details::Reference" citation=$parsedCitation}</p>
-							{/foreach}
-						{else}
-							{$publication->getData('citationsRaw')|escape|nl2br}
-						{/if}
-					</div>
-				</section>
-			{/if}
+		{* References *}
+		{if $parsedCitations || $publication->getData('citationsRaw')}
+			<section class="item references">
+				<h2 class="label">
+					{translate key="submission.citations"}
+				</h2>
+				<div class="value">
+					{if $parsedCitations}
+						{foreach from=$parsedCitations item="parsedCitation"}
+							<p>{$parsedCitation->getCitationWithLinks()|strip_unsafe_html} {call_hook name="Templates::Article::Details::Reference" citation=$parsedCitation}</p>
+						{/foreach}
+					{else}
+						{$publication->getData('citationsRaw')|escape|nl2br}
+					{/if}
+				</div>
+			</section>
+		{/if}
 
 		</div><!-- .main_entry -->
 
@@ -441,5 +440,4 @@
 
 </article>
 
-	{*call_hook name="Templates::Article::Footer::PageFooter"*}
-	{include file="frontend/components/footer.tpl"}
+{include file="frontend/components/footer.tpl"}
