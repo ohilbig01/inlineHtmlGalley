@@ -5,9 +5,9 @@
   * plugins/generic/inlineHtmlGalley/version.xml
   *
   * Copyright (c) University of Pittsburgh
-  * Copyright (c) 2014-2020 Simon Fraser University
-  * Copyright (c) 2003-2020 John Willinsky
-  * Distributed under the GNU GPL v2 or later. For full terms see the file docs/COPYING.
+  * Copyright (c) 2014-2021 Simon Fraser University
+  * Copyright (c) 2003-2021 John Willinsky
+  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Plugin version information.
   -->
@@ -15,7 +15,7 @@
 	<application>inlineHtmlGalley</application>
 	<type>plugins.generic</type>
 	<release>1.0.0.0</release>
-	<date>2020-10-14</date>
+	<date>2021-07-27</date>
 	<lazy-load>1</lazy-load>
 	<class>InlineHtmlGalleyPlugin</class>
 </version>
