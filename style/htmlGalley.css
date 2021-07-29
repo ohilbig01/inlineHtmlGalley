@@ -1,0 +1,64 @@
+/**
+ * @file plugins/generic/inlineHtmlGalley/styles/htmlGalley.css
+ *
+ * Copyright (c) 2014-2021 Simon Fraser University
+ * Copyright (c) 2003-2021 John Willinsky
+ * Copyright (c) 2020-2021 State and University Library Hamburg
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+ *
+ * @brief Classes for inline HTML-Documents
+ */
+
+.inline_html caption {
+	padding-bottom: 5px;
+	caption-side: top;   /* overwrite bootstrap */
+	text-align: left;
+	color: rgba(0,0,0,0.54);
+	caption-side: top;
+	font-size: 1.0em;
+	font-style:italic;
+	border-radius: .3em .3em 0 0;
+	padding: .5em 0.3em 0 0
+}
+
+.inline_html table, th, td { 
+	border-collapse: collapse;
+	padding: .3em .5em; 
+}
+
+.inline_html table {
+	overflow-y:scroll;
+	display:block;
+	margin-left: 1em;
+}
+
+.inline_html th { 
+	color: rgba(0,0,0,0.87);
+	font-weight: 900; 
+	padding: 10px;
+	border-top: 1px solid rgba(0,0,0,0.87);
+	border-bottom: 1px solid rgba(0,0,0,0.87);
+}
+
+/* each even tr grey */
+.inline_html tbody tr:nth-child(even) { 
+	background-color: #e7e7e7; 
+	color: #000; 
+}
+
+.inline_html td {
+	color: rgba(0,0,0,0.87);
+	padding: 10px;
+}
+
+/* table bottom */
+.inline_html tr:last-child {
+	 border-bottom: 1px solid rgba(0,0,0,0.87);
+}
+
+
+.inline_html figcaption {
+	color: rgba(0,0,0,0.54);
+}
+
+
